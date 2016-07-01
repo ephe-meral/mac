@@ -29,6 +29,6 @@ defmodule MAC.Mixfile do
   end
 
   defp aliases do
-    ["clean": ["cmd rm db/lookup_table.eterm", "clean --deps"]]
+    ["clean": ["cmd rm -f db/lookup_table.eterm || true", "clean --deps"]]
   end
 end
