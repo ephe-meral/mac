@@ -40,6 +40,12 @@ defmodule MAC.ParserTest do
     01:02:03\tAComp
 
     # another comment
+    # Well-known addresses.
+
+    01:02:03\tBComp
+
+    01:02:03\tCComp
+
     """
 
     assert parse_wireshark_file(file) == [

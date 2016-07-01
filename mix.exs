@@ -9,7 +9,8 @@ defmodule MAC.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps,
      description: "MAC-to-vendor search for Elixir.",
-     package: package]
+     package: package,
+     aliases: aliases]
   end
 
   def application do
@@ -24,5 +25,9 @@ defmodule MAC.Mixfile do
     [maintainers: ["Johanna Appel"],
      licenses: ["WTFPL"],
      links: %{"GitHub" => "https://github.com/ephe-meral/ex_sider"}]
+  end
+
+  defp aliases do
+    ["compile": ["mac.compile db/wireshark_mac_table.dump", "compile"]]
   end
 end

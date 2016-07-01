@@ -5,6 +5,7 @@ defmodule MAC.Parser do
     text
     |> String.split("\n", trim: true)
     |> Enum.map(fn line -> String.strip(line) end)
+    |> Enum.take_while(fn line -> not String.contains?(line, "Well-known addresses") end)
     |> Enum.filter(fn line -> not String.starts_with?(line, "#") end)
     |> Enum.map(&parse_wireshark_line/1)
     |> Enum.filter(fn x -> not is_nil(x) end)
@@ -12,8 +13,9 @@ defmodule MAC.Parser do
 
   @doc "Returns a tuple with {bitstring-mac (or part), company}"
   def parse_wireshark_line(line) do
-    case String.split(line, ~r/\s/) do
+    case String.split(line, ~r/\s+/) do
       [mac, _, "#" | name] -> {mac |> to_bitstring, name |> Enum.join(" ")}
+      [mac, "#" | name]    -> {mac |> to_bitstring, name |> Enum.join(" ")}
       [mac, company]       -> {mac |> to_bitstring, company}
       _                    -> nil
     end
