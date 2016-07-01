@@ -26,5 +26,6 @@ defmodule MAC.MatcherTest do
 
   test "non-matching stuff" do
     assert MAC.Matcher.fetch_vendor("01-DD-00-FF-FF-FF/13") == :error
+    assert MAC.Matcher.fetch_vendor("other stuff or non-existing") == :error
   end
 end

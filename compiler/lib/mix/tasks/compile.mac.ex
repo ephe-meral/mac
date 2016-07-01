@@ -39,7 +39,7 @@ defmodule Mix.Tasks.Compile.Mac do
         acc |> Map.put(bit_mac, vendor)
       # the prefix is longer, so add it into a list associated with the first 24 bits
       {<<key::bits-size(24), _::bits>>, _} = tuple, acc ->
-        acc |> Map.update(key, [], fn
+        acc |> Map.update(key, [tuple], fn
           list when is_list(list) -> list ++ [tuple]
           _                       -> [tuple]
         end)

@@ -47,11 +47,13 @@ defmodule MAC.ParserTest do
     01:02:03/16\tBComp
 
     01:02:03/16\tCComp
+    01-02-03-FD-FE-FF\tBlubbComp
 
     """
 
     assert parse_wireshark_file(file) == [
       {smaller, "A Company, Inc."},
-      {key, "AComp"}]
+      {key, "AComp"},
+      {@bin, "BlubbComp"}]
   end
 end

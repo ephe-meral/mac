@@ -34,7 +34,7 @@ defmodule MAC.Parser do
   end
 
   defp hex_to_bitstring(hex, take \\ nil) do
-    take = take || String.length(hex) * 4
+    take = take || (String.length(hex) * 4)
     case Base.decode16(hex) do
       {:ok, <<val::bits-size(take), _::bits>>} -> val
       _                                        -> nil

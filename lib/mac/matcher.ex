@@ -5,10 +5,12 @@ defmodule MAC.Matcher do
     %{}
   end)
 
-  # Using the Matcher:
   def fetch_vendor(mac) when is_binary(mac) do
-    (<<key::bits-size(24), _::bits>> = bit_mac) =
-      MAC.Parser.to_bitstring(mac)
+    {key, bit_mac} =
+      case MAC.Parser.to_bitstring(mac) do
+        (<<key::bits-size(24), _::bits-size(24)>> = bit_mac) -> {key, bit_mac}
+        _                                                    -> {nil, nil}
+      end
 
     case @mac_lookup_table[key] do
       vendor when is_binary(vendor) -> {:ok, vendor}
