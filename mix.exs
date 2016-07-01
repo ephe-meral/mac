@@ -25,6 +25,7 @@ defmodule MAC.Mixfile do
   defp package do
     [maintainers: ["Johanna Appel"],
      licenses: ["WTFPL"],
+     files: ["db", "compiler/lib", "compiler/mix.exs", "lib", "mix.exs", "README*", "LICENSE*"],
      links: %{"GitHub" => "https://github.com/ephe-meral/mac"}]
   end
 
