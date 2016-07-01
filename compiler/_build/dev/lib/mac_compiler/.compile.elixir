@@ -1,0 +1,14 @@
+v2.
+{<<"_build/dev/lib/mac_compiler/ebin/Elixir.MAC.Parser.beam">>,
+ 'Elixir.MAC.Parser',module,
+ <<"/usr/home/amnesia/projects/mac/lib/mac/parser.ex">>,
+ ['Elixir.Kernel','Elixir.Module'],
+ ['Elixir.Base',erlang,'Elixir.String','Elixir.Enum','Elixir.Regex'],
+ [],nil}.
+{<<"_build/dev/lib/mac_compiler/ebin/Elixir.Mix.Tasks.Compile.Mac.beam">>,
+ 'Elixir.Mix.Tasks.Compile.Mac',module,<<"lib/mix/tasks/compile.mac.ex">>,
+ ['Elixir.Code','Elixir.Kernel','Elixir.Module','Elixir.Enum',
+  'Elixir.Mix.Task'],
+ ['Elixir.Map',erlang,'Elixir.File','Elixir.String.Chars','Elixir.IO',
+  'Elixir.MAC.Parser'],
+ [],nil}.

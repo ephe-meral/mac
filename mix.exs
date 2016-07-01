@@ -7,10 +7,11 @@ defmodule MAC.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     compilers: [:mac | Mix.compilers],
      deps: deps,
      description: "MAC-to-vendor search for Elixir.",
-     package: package,
-     aliases: aliases]
+     aliases: aliases,
+     package: package]
   end
 
   def application do
@@ -18,16 +19,16 @@ defmodule MAC.Mixfile do
   end
 
   defp deps do
-    []
+    [{:mac_compiler, path: "compiler"}]
   end
 
   defp package do
     [maintainers: ["Johanna Appel"],
      licenses: ["WTFPL"],
-     links: %{"GitHub" => "https://github.com/ephe-meral/ex_sider"}]
+     links: %{"GitHub" => "https://github.com/ephe-meral/mac"}]
   end
 
   defp aliases do
-    ["compile": ["mac.compile db/wireshark_mac_table.dump", "compile"]]
+    ["clean": ["cmd rm db/lookup_table.eterm", "clean --deps"]]
   end
 end

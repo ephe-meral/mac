@@ -42,9 +42,11 @@ defmodule MAC.ParserTest do
     # another comment
     # Well-known addresses.
 
-    01:02:03\tBComp
+    # here be dragons and shorter bitmasks - which we ignore!
 
-    01:02:03\tCComp
+    01:02:03/16\tBComp
+
+    01:02:03/16\tCComp
 
     """
 
