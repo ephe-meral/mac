@@ -14,12 +14,11 @@ defmodule MAC.Matcher do
 
     case @mac_lookup_table[key] do
       vendor when is_binary(vendor) -> {:ok, vendor}
-      entry when is_list(entry) ->
-        entry
-        |> Enum.find(:error, &match_prefix(&1, bit_mac))
-        |> case do
-          {_, vendor} -> {:ok, vendor}
-          _           -> :error
+      {key_bitsize, %{} = sub_match_map} ->
+        <<sub_key::bits-size(key_bitsize), _::bits>> = bit_mac
+        case sub_match_map[sub_key] do
+          vendor when is_binary(vendor) -> {:ok, vendor}
+          _                             -> :error
         end
       _ -> :error
     end
@@ -27,9 +26,4 @@ defmodule MAC.Matcher do
 
   @doc false
   def mac_lookup_table, do: @mac_lookup_table
-
-  defp match_prefix({prefix, _}, mac) do
-    size = bit_size(prefix)
-    match?(<<^prefix::bits-size(size), _::bits>>, mac)
-  end
 end

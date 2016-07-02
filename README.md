@@ -18,7 +18,7 @@ In your `mix.exs` file:
 
 ```elixir
 def deps do
-  [{:mac, "~> 0.0.1"}]
+  [{:mac, "~> 0.1.0"}]
 end
 ```
 
@@ -45,7 +45,27 @@ MAC.Parser.to_bitstring("00:00:F0/20")
 
 ## speed
 
-If you have problems with the lookup speed, please let me know (create an issue here).
+For a very simple profiling experiment, I used fprof and 10000 lookups of the same MAC with sub-space matching, which took approx. 7600 milliseconds.
+
+If you seem to have problems with the lookup speed, please let me know (create an issue here). I assume that this approach is still faster than calling an external API etc. for this purpose.
+
+## lookup-table structure and assumptions
+
+The table is a max 2 level map with the following assumptions:
+
+- the outer map's keys are the first 3 byte of the MAC address
+- the outer map's values are either:
+  - a binary with the company name, or
+  - a tuple with `{key_bitsize, sub_match_map}`
+- a sub-match map key is the entire prefix of any MAC address space with a bitmask biggen than /24 - they are required to be all of the same length per sub-match map (the compiler will notify you if it drops keys b/c of a mismatch)
+- the sub-match map's values are the binary vendor names
+
+```elixir
+%{<<1, 2, 3>> => "Some Company Inc.",
+  <<4, 5, 6>> => {32, %{
+    <<4, 5, 6, 7>> => "Another Comp LLC",
+    <<4, 5, 6, 8>> => "A 3rd Organisation"}}}
+```
 
 ## is it any good?
 
