@@ -3,5 +3,5 @@
 /cover
 /deps
 erl_crash.dump
-lookup_table.eterm
 *.ez
+*.eterm

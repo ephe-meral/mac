@@ -1,7 +1,15 @@
 defmodule MAC.Matcher do
-  @mac_lookup_table (if File.exists?("db/lookup_table.eterm") do
-    File.read!("db/lookup_table.eterm") |> :erlang.binary_to_term
+  alias MAC.Compiler
+
+  @source_file Application.app_dir(:mac, "priv") <> "/wireshark_mac_table.dump"
+  @external_resource @source_file
+
+  @mac_lookup_table (if File.exists?(@source_file) do
+    table = File.read!(@source_file) |> Compiler.build_lookup_table
+    IO.puts("MAC-Table created with #{Compiler.count_entries(table)} entries, now compiling...")
+    table
   else
+    IO.puts("Couldn't find MAC table file at: #{@source_file}")
     %{}
   end)
 
