@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/ephe-meral/mac.svg?branch=master)](https://travis-ci.org/ephe-meral/mac)
 [![Hex.pm](https://img.shields.io/hexpm/l/mac.svg "WTFPL Licensed")](https://github.com/ephe-meral/mac/blob/master/LICENSE)
 [![Hex version](https://img.shields.io/hexpm/v/mac.svg "Hex version")](https://hex.pm/packages/mac)
+[![Documentation](https://img.shields.io/badge/docs-hexpm-blue.svg)](http://hexdocs.pm/mac/)
 
 # MAC
 
